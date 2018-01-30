@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ classpath:mapper/ProjectMapper.xml
+ -->
+<mapper namespace="cn.kane.travel.attachement.dao.AttachementDao">
+
+    <select id="findObjects" 
+    resultType="cn.kane.travel.attachement.entity.Attachement">
+       select *
+       from travel_attachements
+       order by createdTime desc
+    </select>
+    
+    <select id="findObjectByDisgest" 
+      resultType="java.lang.Integer">
+      select count(*)
+      from travel_attachements
+      where fileDisgest=#{fileDisgest}
+    </select>
+    
+    <select id="findAttachementById"
+     resultType="cn.kane.travel.attachement.entity.Attachement">
+       select *
+       from travel_attachements
+       where id=#{id}
+    </select>
+    
+    <insert id="insertObject" 
+    parameterType="cn.kane.travel.attachement.entity.Attachement">
+    
+       insert into travel_attachements
+       (id,title,fileName,contentType,
+        filePath,fileDisgest,athType,
+        belongId,createdTime,modifiedTime,
+        createdUser,modifiedUser)
+        values(
+        #{id},#{title},#{fileName},#{contentType},
+        #{filePath},#{fileDisgest},#{athType},
+        #{belongId},#{createdTime},#{modifiedTime},
+        #{createdUser},#{modifiedUser})
+    
+    </insert>
+    
+</mapper> 
